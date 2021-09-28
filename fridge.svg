@@ -1,4 +1,21 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 800">
+    <!-------------------- Structure --------------------->
+    <g>
+        <!-- Fridge outline -->
+        <path
+            d="M30 2.5 L470 2.5 Q497.5 2.5 497.5 30 L497.5 770 Q497.5 797.5 470 797.5 L30 797.5 Q2.5 797.5 2.5 770 L2.5 30 Q2.5 2.5 30 2.5"
+            stroke="black" stroke-width="5" fill="#EFEFEF" />
+
+        <!-- Fridge opening -->
+        <path
+            d="M45 230 L455 230 Q470 230 470 245 L470 715 Q470 730 455 730 L45 730 Q30 730 30 715 L30 245 Q30 230 45 230"
+            stroke="black" stroke-width="5" fill="#CFCFCF" />
+
+        <!-- Freezer opening -->
+        <path d="M45 30 L455 30 Q470 30 470 45 L470 185 Q470 200 455 200 L45 200 Q30 200 30 185 L30 45 Q30 30 45 30"
+            stroke="black" stroke-width="5" fill="#CFCFCF" />
+    </g>
+
     <!-------------------- 3D effects -------------------->
     <g>
         <!-- Fridge 3D -->
@@ -62,22 +79,5 @@
         <path
             d="M30 115 L470 115 M30 115 L50 140 M52 115 L70 140 M74 115 L90 140 M96 115 L110 140 M118 115 L130 140 M140 115 L150 140 M162 115 L170 140 M184 115 L190 140 M206 115 L210 140 M228 115 L230 140 M250 115 L250 140 M272 115 L270 140 M294 115 L290 140 M316 115 L310 140 M338 115 L330 140 M360 115 L350 140 M382 115 L370 140 M404 115 L390 140 M426 115 L410 140 M448 115 L430 140 M470 115 L450 140"
             stroke="black" stroke-width="4" fill="none" />
-    </g>
-
-    <!-------------------- Structure --------------------->
-    <g>
-        <!-- Fridge outline -->
-        <path
-            d="M30 2.5 L470 2.5 Q497.5 2.5 497.5 30 L497.5 770 Q497.5 797.5 470 797.5 L30 797.5 Q2.5 797.5 2.5 770 L2.5 30 Q2.5 2.5 30 2.5"
-            stroke="black" stroke-width="5" fill="none" />
-
-        <!-- Fridge opening -->
-        <path
-            d="M45 230 L455 230 Q470 230 470 245 L470 715 Q470 730 455 730 L45 730 Q30 730 30 715 L30 245 Q30 230 45 230"
-            stroke="black" stroke-width="5" fill="none" />
-
-        <!-- Freezer opening -->
-        <path d="M45 30 L455 30 Q470 30 470 45 L470 185 Q470 200 455 200 L45 200 Q30 200 30 185 L30 45 Q30 30 45 30"
-            stroke="black" stroke-width="5" fill="none" />
     </g>
 </svg>
