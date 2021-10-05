@@ -1,6 +1,43 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300"
     height="800" viewBox="0 0 300 800">
-    <path
-        d="M100 125 L100 125 Q100 200 60 250 2.5 300 2.5 350 L2.5 780 Q2.5 797.5 30 797.5 L270 797.5 Q297.5 797.5 297.5 780 L297.5 350 Q297.5 300 240 250 200 200 200 125 L200 125"
-        stroke="black" stroke-width="5" fill="white" />
+    <!-- Bottle -->
+    <g>
+        <!-- Outline -->
+        <path
+            d="M100 125 L100 125 Q100 200 60 250 2.5 300 2.5 350 L2.5 370 Q2.5 375 7.5 375 L7.5 650 Q2.5 650 2.5 655 L2.5 780 Q2.5 797.5 30 797.5 L270 797.5 Q297.5 797.5 297.5 780 L297.5 655 Q297.5 650 292.5 650 L292.5 375 Q297.5 375 297.5 370 L297.5 350 Q297.5 300 240 250 200 200 200 125 L200 125"
+            stroke="black" stroke-width="5" fill="#ebebeb" />
+
+        <!-- Grooves -->
+        <path d="M10 374 L290 374 M10 651 L290 650" stroke="#686868" stroke-width="3" fill="none" />
+
+        <!-- Cap -->
+        <path d="M95 125 L95 95 Q95 90 100 90 L200 90 Q205 90 205 95 L205 125 Z" stroke="black" stroke-width="5"
+            fill="blue" />
+    </g>
+
+    <!-- Label -->
+    <g>
+        <!-- Background -->
+        <rect x="8.5" y="380" width="283" height="265" stroke="black" stroke-width="3" fill="#4949ff" />
+
+        <!-- Foreground -->
+        <rect x="50" y="437.5" width="200" height="150" stroke="black" stroke-width="3" fill="#dddddd" />
+
+        <!-- Udder -->
+        <g>
+            <!-- Container -->
+            <path d="M125 450 L175 450 Q200 450 185 470 150 505 115 470 100 450 125 450" stroke="#5c381d" stroke-width="5" fill="#eaa6b0" />
+
+            <!-- Teats -->
+            <g>
+                <path d="M125 470 Q110 520 132.5 472.5" stroke="#5c381d" stroke-width="4" fill="#eaa6b0" />
+                <path d="M137.5 486.5 Q137.5 510 145 488" stroke="#5c381d" stroke-width="4" fill="#eaa6b0" />
+                <path d="M155 475 Q160 530 165 472.5" stroke="#5c381d" stroke-width="4" fill="#eaa6b0" />
+                <path d="M172.5 482.5 Q190 510 180 477" stroke="#5c381d" stroke-width="4" fill="#eaa6b0" />
+            </g>
+        </g>
+
+        <!-- Text -->
+        <text x="75" y="570" font-size="70" font-weight="1000" >MILK</text>
+    </g>
 </svg>
