@@ -12,3 +12,6 @@ environment:
 
 dev_dependencies:
   lints: ^1.0.0
+dependencies: 
+  build_runner: ^2.1.4
+  json_serializable: ^5.0.2
