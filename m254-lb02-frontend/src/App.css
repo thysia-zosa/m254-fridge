@@ -1,0 +1,25 @@
+.store {
+	border: 2px solid black;
+	position: absolute;
+	left: 4vw;
+	top: 2vh;
+	width: 28vw;
+	height: 96vh;
+}
+
+.fridge {
+	position: absolute;
+	left: 36vw;
+	top: 2vh;
+	width: 28vw;
+	height: 96vh;
+}
+
+.details {
+	border: 2px solid black;
+	position: absolute;
+	left: 68vw;
+	top: 2vh;
+	width: 28vw;
+	height: 96vh;
+}

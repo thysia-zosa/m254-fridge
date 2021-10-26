@@ -1,0 +1,35 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400"
+    height="400" viewBox="0 0 400 400">
+    <rect x="0" y="0" width="400" height="400" fill="none" stroke="white" />
+
+    <defs>
+        <g id="carrot">
+            <!-- Greens -->
+            <g>
+                <path
+                    d="M255 150 L265 130 Q275 160 300 80 320 105 310 50 330 70 350 65 360 100 380 100 310 120 330 130 290 150 310 160 L270 180"
+                    stroke="#005700" stroke-width="3" fill="#008d00" />
+                <path d="M270 145 Q290 165 300 100" stroke="#005700" stroke-width="3" fill="none" />
+                <path d="M315 125 Q300 105 350 80" stroke="#005700" stroke-width="3" fill="none" />
+                <path d="M290 160 Q285 150 305 130" stroke="#005700" stroke-width="3" fill="none" />
+            </g>
+
+            <!-- Outline -->
+            <path d="M250 150 Q280 150 280 180 -175 575 250 150 Z" stroke="#8b4f00" stroke-width="5" fill="#ff9100" />
+
+            <!-- Grooves -->
+            <g>
+                <path d="M210 187.5 Q230 195 232.5 212.5" stroke="#8b4f00" stroke-width="3" fill="none" />
+                <path d="M200 200 Q215 205 222 220" stroke="#8b4f00" stroke-width="3" fill="none" />
+                <path d="M185 215 Q200 215 205 235" stroke="#8b4f00" stroke-width="3" fill="none" />
+                <path d="M150 250 Q165 255 165 265" stroke="#8b4f00" stroke-width="3" fill="none" />
+                <path d="M135 265 Q150 265 150 280" stroke="#8b4f00" stroke-width="3" fill="none" />
+            </g>
+        </g>
+    </defs>
+
+    <use xlink:href="#carrot" transform="rotate(10 150 300) scale(0.9)" />
+    <use xlink:href="#carrot" transform="rotate(-20 350 -50) scale(0.8)" />
+    <use xlink:href="#carrot" transform="rotate(-10 600 -300) scale(0.7)" />
+    <use xlink:href="#carrot" />
+</svg>
