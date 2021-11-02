@@ -23,3 +23,29 @@
 	width: 28vw;
 	height: 96vh;
 }
+
+.carrotsInFridge {
+	position: absolute;
+	left: 48vw;
+	top: 65vh;
+	z-index: 999;
+	rotate: 25deg;
+	filter: saturate(50%);
+}
+
+.cheeseInFridge {
+	position: absolute;
+	left: 35vw;
+	top: 51vh;
+	z-index: 999;
+	rotate: -15deg;
+	transform: scaleX(-1);
+}
+
+.milkInFridge {
+	position: absolute;
+	left: 53vw;
+	top: 41vh;
+	z-index: 999;
+	rotate: 90deg;
+}
