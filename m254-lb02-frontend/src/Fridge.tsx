@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import fridge from "./img/fridge.svg";
 import { useDrop } from "react-dnd";
-
-type FridgeProps = {
-    draggedFoodItem: "carrots" | "cheese" | "milk" | undefined,
-    dropCallback: () => void
-};
+import { FridgeProps } from "./types";
 
 const Fridge = ({ draggedFoodItem, dropCallback }: FridgeProps) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [content, setContent] = useState<string[]>([]);
 
     const [{ dropResult }, drop] = useDrop({
         accept: ["carrots", "cheese", "milk"],
@@ -18,7 +13,6 @@ const Fridge = ({ draggedFoodItem, dropCallback }: FridgeProps) => {
 
     useEffect(() => {
         if (dropResult && draggedFoodItem) {
-            setContent(prev => [...prev, draggedFoodItem]);
             dropCallback();
         }
     }, [dropResult, draggedFoodItem]);
