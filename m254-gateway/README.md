@@ -8,43 +8,128 @@
 
 ## API ("externe" Auslöser)
 
-"http://localhost:8087/"
+**Base URL:** `http://localhost:8087`
 
-### Warenbestand anzeigen
+### Endpoints  
 
-GET, ohne body
+> **Add Food Item**
+> 
+> Path: `/`  
+> 
+> Method: _POST_
+> 
+> Format:  
+> ```typescript
+> body: {
+>   id: string,
+>   type: string,
+>   expirationDate: string,
+>   description: string
+> }
+> ```
+>
+> Example:  
+> ```typescript
+> body: {
+>   id: "fe0659bd-91e6-482e-ab4e-847ff61f2d0a",
+>   type: "milk",
+>   expirationDate: "2021-12-02",
+>   description: "500ml Vollmilch"
+> }
+> ```
+> 
+> Return:  
+> _201 Created_
+> ```typescript
+> body: { }
+> ```
 
-### Warenbestand aktualisieren
+---
 
-* name: Art des Gegenstandes (z.B. "Käse")
-* date: Ablaufdatum
+> **Get Inventory**  
+> 
+> Path: `/`  
+> 
+> Method: _GET_  
+> 
+> Format:  
+> ```typescript
+> body: { }
+> ```
+> 
+> Example:  
+> ```typescript
+> body: { }
+> ```
+> 
+> Return:  
+> _200 Ok_  
+> ```typescript
+> body: {
+>   id: string,
+>   type: string,
+>   expirationDate: string,
+>   description: string
+> }[]
+> ```
 
-#### Hinzufügen
+---
 
-POST
+> **Update Food Item**  
+> 
+> Path: `/`  
+> 
+> Method: _PUT_  
+> 
+> Format:  
+> ```typescript
+> body: {
+>   id: string,
+>   type: string,
+>   expirationDate: string,
+>   description: string
+> }
+> ```
+> 
+> Example:  
+> ```typescript
+> body: {
+>   id: "fe0659bd-91e6-482e-ab4e-847ff61f2d0a",
+>   type: "milk",
+>   expirationDate: "2021-12-02",
+>   description: "500ml Vollmilch"
+> }
+> ```
+> 
+> Return:  
+> _200 Ok_  
+> ```typescript
+> body: { }
+> ```
 
-body: {
-  "name": "",
-  "date": ""
-}
+---
 
-#### Verändern
-
-PUT
-
-body: {
-  "id": "",
-  "name": "",
-  "date": ""
-}
-
-#### Wegnehmen
-
-DELETE
-
-body: {
-  "id": "xyz"
-}
+> **Delete Food Item**  
+> 
+> Path: `/{id}`  
+> 
+> Method: _DELETE_  
+> 
+> Format:  
+> ```typescript
+> body: { }
+> ```
+> 
+> Example:  
+> ```typescript
+> body: { }
+> ```
+> 
+> Return:  
+> _204 No Content_
+> ```typescript
+> body: { }
+> ```
 
 ## "Interne" Auslöser
 
