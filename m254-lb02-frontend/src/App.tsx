@@ -35,9 +35,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    api.getInventory().then(inventory => {
-
-    });
+    api.getInventory().then(setFridgeContent);
   }, []);
 
   return <DndProvider backend={HTML5Backend}>
