@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_15t0x72" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:collaboration id="Collaboration_0zkefen">
+    <bpmn:participant id="Participant_1fb1e0z" processRef="Process_1x0bbel" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1x0bbel" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_0mqjqtc" sourceRef="StartEvent_1" targetRef="Activity_1iohovw" />
+    <bpmn:scriptTask id="Activity_1iohovw" name="output" scriptFormat="groovy">
+      <bpmn:incoming>Flow_0mqjqtc</bpmn:incoming>
+      <bpmn:outgoing>Flow_10wyhxn</bpmn:outgoing>
+      <bpmn:script>println "a = 2"</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0mqjqtc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1mmno1o">
+      <bpmn:incoming>Flow_10wyhxn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_10wyhxn" sourceRef="Activity_1iohovw" targetRef="Event_1mmno1o" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0zkefen">
+      <bpmndi:BPMNShape id="Participant_1fb1e0z_di" bpmnElement="Participant_1fb1e0z" isHorizontal="true">
+        <dc:Bounds x="129" y="60" width="789" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0mqjqtc_di" bpmnElement="Flow_0mqjqtc">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="530" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10wyhxn_di" bpmnElement="Flow_10wyhxn">
+        <di:waypoint x="630" y="177" />
+        <di:waypoint x="782" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0zb8nre_di" bpmnElement="Activity_1iohovw">
+        <dc:Bounds x="530" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vnudhc_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mmno1o_di" bpmnElement="Event_1mmno1o">
+        <dc:Bounds x="782" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

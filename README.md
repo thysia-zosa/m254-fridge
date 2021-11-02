@@ -48,3 +48,14 @@ Folgende Lebensmittel können registriert werden:
 * Ware hinzufügen
 * Ware wegnehmen
 * Ware bearbeiten
+
+## Bemerkungen
+
+Nach einem Gespräch mit dem Lehrer:  
+Statt einer Datenbankanbindung (die – egal wie – mühsam sein wird) Lesen aus
+einer / Schreiben in eine Datei. Dabei sind die beiden Tasks, die mit der "DB"
+zu tun haben zu einem (kleinen!) Subtask auszubauen, die ein Skript zum Lesen
+bzw. Schreiben ausführen.
+
+Die Aufgabe des Gateways wäre dann, den Request vom Frontend anzunehmen,
+den Prozess zu starten, ihn mit Daten zu füttern, und das Resultat zurückzusenden.

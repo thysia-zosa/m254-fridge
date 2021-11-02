@@ -16,4 +16,4 @@
 
 ## Graphische Darstellung
 
-[//]: # "TODO: BPMN-Graphik einfügen"
+![BPMN-Graphik](fridge-process.svg)
