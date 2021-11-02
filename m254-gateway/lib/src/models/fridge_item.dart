@@ -8,11 +8,13 @@ class FridgeItem {
   ObjectId id;
   String name;
   DateTime date;
+  String? metaData;
 
   FridgeItem({
     required this.name,
     required this.date,
     String? id,
+    this.metaData,
   }) : id = id == null ? ObjectId() : ObjectId.fromHexString(id);
 
   factory FridgeItem.fromJson(Map<String, dynamic> json) =>
