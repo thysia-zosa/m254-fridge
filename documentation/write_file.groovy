@@ -1,5 +1,4 @@
-// filename = 'fridge.json'
+filename = 'fridge.json'
 
-// File file = new File(filename)
-// println('test')
-// file.write('this is test')
+File file = new File(filename)
+file.write('this is test')
