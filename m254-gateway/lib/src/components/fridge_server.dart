@@ -40,6 +40,7 @@ class FridgeServer {
   Future<void> stop() async {
     await _subscription.cancel();
     await server.close();
+    print('Server shut down');
   }
 
   Future<void> onData(HttpRequestBody requestBody) async {
@@ -59,7 +60,7 @@ class FridgeServer {
       await handleRequest[requestBody.request.method]!(requestBody);
     } catch (_) {
       requestBody.request.response
-        ..statusCode = HttpStatus.methodNotAllowed
+        ..statusCode = HttpStatus.badRequest
         ..write('resource not found');
       await requestBody.request.response.close();
     }
@@ -75,7 +76,7 @@ class FridgeServer {
 
   Future<void> handlePost(HttpRequestBody requestBody) async {
     await fridge.add(requestBody.body);
-    requestBody.request.response.statusCode = HttpStatus.ok;
+    requestBody.request.response.statusCode = HttpStatus.created;
     await requestBody.request.response.close();
   }
 
@@ -86,8 +87,8 @@ class FridgeServer {
   }
 
   Future<void> handleDelete(HttpRequestBody requestBody) async {
-    await fridge.delete(requestBody.body);
-    requestBody.request.response.statusCode = HttpStatus.ok;
+    await fridge.delete(requestBody.request.uri.pathSegments.last);
+    requestBody.request.response.statusCode = HttpStatus.noContent;
     await requestBody.request.response.close();
   }
 

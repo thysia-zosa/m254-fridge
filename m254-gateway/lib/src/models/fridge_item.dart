@@ -1,21 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:mongo_dart/mongo_dart.dart';
 
 part 'fridge_item.g.dart';
 
 @JsonSerializable()
 class FridgeItem {
-  ObjectId id;
-  String name;
-  DateTime date;
-  String? metaData;
+  String id;
+  String type;
+  String expirationDate;
+  String description;
 
   FridgeItem({
-    required this.name,
-    required this.date,
-    String? id,
-    this.metaData,
-  }) : id = id == null ? ObjectId() : ObjectId.fromHexString(id);
+    required this.id,
+    required this.type,
+    required this.expirationDate,
+    required this.description,
+  });
 
   factory FridgeItem.fromJson(Map<String, dynamic> json) =>
       _$FridgeItemFromJson(json);

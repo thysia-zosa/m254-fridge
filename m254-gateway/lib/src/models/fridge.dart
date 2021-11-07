@@ -33,6 +33,6 @@ class Fridge {
   }
 
   Future<void> delete(String id) async {
-    _list.removeWhere((element) => element.id.toHexString() == id);
+    _list.removeWhere((element) => element.id == id);
   }
 }

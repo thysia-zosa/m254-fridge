@@ -12,79 +12,6 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_0vvjfet" isExecutable="false">
     <bpmn:dataStoreReference id="DataStoreReference_08bdx4a" name="Datenbank" />
-    <bpmn:intermediateCatchEvent id="Event_1mcqq4j" name="Samstag, 08:00 Uhr">
-      <bpmn:incoming>Flow_0lkol3f</bpmn:incoming>
-      <bpmn:outgoing>Flow_1gcc1ox</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0hgtbxm">
-        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression" />
-      </bpmn:timerEventDefinition>
-    </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="Event_1aascj0" name="Ablaufdatum einer Ware &#60; 1 Tag">
-      <bpmn:incoming>Flow_1vaf5k4</bpmn:incoming>
-      <bpmn:outgoing>Flow_02boku0</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0ah6sxy" />
-    </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="Event_1rlp9jb" name="Warenentnahme / -zufügung / -änderung">
-      <bpmn:incoming>Flow_0l0db5n</bpmn:incoming>
-      <bpmn:outgoing>Flow_0l9uz5c</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0oop3d4" />
-    </bpmn:intermediateCatchEvent>
-    <bpmn:task id="Activity_12s9g1b" name="Einkaufsliste verschicken">
-      <bpmn:incoming>Flow_1gcc1ox</bpmn:incoming>
-      <bpmn:outgoing>Flow_0wwxktz</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:endEvent id="Event_12t421v">
-      <bpmn:incoming>Flow_0wwxktz</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent id="Event_02grym4">
-      <bpmn:incoming>Flow_17df78z</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:task id="Activity_00s0a18" name="Warnung verschicken">
-      <bpmn:incoming>Flow_02boku0</bpmn:incoming>
-      <bpmn:outgoing>Flow_17df78z</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:startEvent id="StartEvent_1" name="">
-      <bpmn:outgoing>Flow_1acp5to</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:task id="Activity_1ahxb08" name="Warenbestand laden">
-      <bpmn:incoming>Flow_1acp5to</bpmn:incoming>
-      <bpmn:outgoing>Flow_13knma1</bpmn:outgoing>
-      <bpmn:property id="Property_1euyqzd" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_06li9pc">
-        <bpmn:sourceRef>DataStoreReference_08bdx4a</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1euyqzd</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:task>
-    <bpmn:eventBasedGateway id="Gateway_08smnrb">
-      <bpmn:incoming>Flow_13knma1</bpmn:incoming>
-      <bpmn:outgoing>Flow_0lkol3f</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0l0db5n</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1vaf5k4</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0f8q7l0</bpmn:outgoing>
-    </bpmn:eventBasedGateway>
-    <bpmn:exclusiveGateway id="Gateway_1p1kp4p" name="Kritischer Bestand unterschritten?">
-      <bpmn:incoming>Flow_15vranm</bpmn:incoming>
-      <bpmn:outgoing>Flow_0ki1p7m</bpmn:outgoing>
-      <bpmn:outgoing>Flow_18dwba6</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:task id="Activity_16pzux1" name="Warnung verschicken">
-      <bpmn:incoming>Flow_0ki1p7m</bpmn:incoming>
-      <bpmn:outgoing>Flow_10798fz</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:endEvent id="Event_0t96svt">
-      <bpmn:incoming>Flow_18dwba6</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:intermediateCatchEvent id="Event_1ymcaq4" name="Frontendaufruf">
-      <bpmn:incoming>Flow_0f8q7l0</bpmn:incoming>
-      <bpmn:outgoing>Flow_0sepqqi</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_17cxr3a" />
-    </bpmn:intermediateCatchEvent>
-    <bpmn:endEvent id="Event_0hr4f1r">
-      <bpmn:incoming>Flow_0kc38g7</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent id="Event_0xa4n1q">
-      <bpmn:incoming>Flow_10798fz</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0lkol3f" sourceRef="Gateway_08smnrb" targetRef="Event_1mcqq4j" />
     <bpmn:sequenceFlow id="Flow_1gcc1ox" sourceRef="Event_1mcqq4j" targetRef="Activity_12s9g1b" />
     <bpmn:sequenceFlow id="Flow_0l0db5n" sourceRef="Gateway_08smnrb" targetRef="Event_1rlp9jb" />
@@ -102,10 +29,6 @@
     <bpmn:sequenceFlow id="Flow_18dwba6" name="nein" sourceRef="Gateway_1p1kp4p" targetRef="Event_0t96svt" />
     <bpmn:sequenceFlow id="Flow_0sepqqi" sourceRef="Event_1ymcaq4" targetRef="Activity_171mxyh" />
     <bpmn:sequenceFlow id="Flow_0kc38g7" sourceRef="Activity_171mxyh" targetRef="Event_0hr4f1r" />
-    <bpmn:sendTask id="Activity_171mxyh" name="Warenbestand anzeigen">
-      <bpmn:incoming>Flow_0sepqqi</bpmn:incoming>
-      <bpmn:outgoing>Flow_0kc38g7</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:subProcess id="Activity_1k36hw9" name="Warenbestand aktualisieren">
       <bpmn:incoming>Flow_0l9uz5c</bpmn:incoming>
       <bpmn:outgoing>Flow_15vranm</bpmn:outgoing>
@@ -113,6 +36,83 @@
         <bpmn:targetRef>DataStoreReference_08bdx4a</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:subProcess>
+    <bpmn:sendTask id="Activity_171mxyh" name="Warenbestand anzeigen">
+      <bpmn:incoming>Flow_0sepqqi</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kc38g7</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_0xa4n1q">
+      <bpmn:incoming>Flow_10798fz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_0hr4f1r">
+      <bpmn:incoming>Flow_0kc38g7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="Event_1ymcaq4" name="Frontendaufruf">
+      <bpmn:incoming>Flow_0f8q7l0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sepqqi</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_17cxr3a" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="Event_0t96svt">
+      <bpmn:incoming>Flow_18dwba6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Activity_16pzux1" name="Warnung verschicken">
+      <bpmn:incoming>Flow_0ki1p7m</bpmn:incoming>
+      <bpmn:outgoing>Flow_10798fz</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_1p1kp4p" name="Kritischer Bestand unterschritten?">
+      <bpmn:incoming>Flow_15vranm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ki1p7m</bpmn:outgoing>
+      <bpmn:outgoing>Flow_18dwba6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:eventBasedGateway id="Gateway_08smnrb">
+      <bpmn:incoming>Flow_13knma1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lkol3f</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0l0db5n</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1vaf5k4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0f8q7l0</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:startEvent id="StartEvent_1" name="">
+      <bpmn:outgoing>Flow_1acp5to</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_00s0a18" name="Warnung verschicken">
+      <bpmn:incoming>Flow_02boku0</bpmn:incoming>
+      <bpmn:outgoing>Flow_17df78z</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_02grym4">
+      <bpmn:incoming>Flow_17df78z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_12t421v">
+      <bpmn:incoming>Flow_0wwxktz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Activity_12s9g1b" name="Einkaufsliste verschicken">
+      <bpmn:incoming>Flow_1gcc1ox</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wwxktz</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="Event_1rlp9jb" name="Warenentnahme / -zufügung / -änderung">
+      <bpmn:incoming>Flow_0l0db5n</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l9uz5c</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0oop3d4" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Event_1aascj0" name="Ablaufdatum einer Ware &#60; 1 Tag">
+      <bpmn:incoming>Flow_1vaf5k4</bpmn:incoming>
+      <bpmn:outgoing>Flow_02boku0</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0ah6sxy" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Event_1mcqq4j" name="Samstag, 08:00 Uhr">
+      <bpmn:incoming>Flow_0lkol3f</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gcc1ox</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0hgtbxm">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression" />
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="Activity_1ahxb08" name="Warenbestand laden">
+      <bpmn:incoming>Flow_1acp5to</bpmn:incoming>
+      <bpmn:outgoing>Flow_13knma1</bpmn:outgoing>
+      <bpmn:property id="Property_1lpdvjj" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_06li9pc">
+        <bpmn:sourceRef>DataStoreReference_08bdx4a</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1lpdvjj</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Kuehlschrank">
@@ -262,7 +262,7 @@
       <bpmndi:BPMNShape id="Activity_1gjv93c_di" bpmnElement="Activity_171mxyh">
         <dc:Bounds x="660" y="210" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_00wrslw_di" bpmnElement="Activity_1k36hw9">
+      <bpmndi:BPMNShape id="Activity_0ae907v_di" bpmnElement="Activity_1k36hw9">
         <dc:Bounds x="730" y="310" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_08bdx4a_di" bpmnElement="DataStoreReference_08bdx4a">
@@ -274,13 +274,13 @@
       <bpmndi:BPMNShape id="Participant_17i4s0j_di" bpmnElement="Participant_1cko1vj" isHorizontal="true" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
         <dc:Bounds x="160" y="80" width="1070" height="60" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0hlwlq0_di" bpmnElement="DataOutputAssociation_0hlwlq0">
-        <di:waypoint x="771" y="390" />
-        <di:waypoint x="700" y="695" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_06li9pc_di" bpmnElement="DataInputAssociation_06li9pc">
         <di:waypoint x="665" y="703" />
         <di:waypoint x="365" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0hlwlq0_di" bpmnElement="DataOutputAssociation_0hlwlq0">
+        <di:waypoint x="771" y="390" />
+        <di:waypoint x="700" y="695" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1feput1_di" bpmnElement="Flow_1feput1">
         <di:waypoint x="650" y="140" />

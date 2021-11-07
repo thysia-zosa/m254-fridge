@@ -1,2 +1,3 @@
-export 'src/models/fridge_item.dart';
 export 'src/components/fridge_server.dart';
+export 'src/models/fridge.dart';
+export 'src/models/fridge_item.dart';

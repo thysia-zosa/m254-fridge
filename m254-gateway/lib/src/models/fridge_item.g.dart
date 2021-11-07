@@ -7,12 +7,16 @@ part of 'fridge_item.dart';
 // **************************************************************************
 
 FridgeItem _$FridgeItemFromJson(Map<String, dynamic> json) => FridgeItem(
-      name: json['name'] as String,
-      date: DateTime.parse(json['date'] as String),
+      id: json['id'] as String,
+      type: json['type'] as String,
+      expirationDate: json['expirationDate'] as String,
+      description: json['description'] as String,
     );
 
 Map<String, dynamic> _$FridgeItemToJson(FridgeItem instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'date': instance.date.toIso8601String(),
+      'id': instance.id,
+      'type': instance.type,
+      'expirationDate': instance.expirationDate,
+      'description': instance.description,
     };

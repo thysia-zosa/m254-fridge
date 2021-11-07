@@ -7,13 +7,13 @@
     <scriptTask id="task" name="Groovy Script" scriptFormat="groovy">
       <script>
         <![CDATA[
-        sum = 0
+        sum = 0;
 
         for ( i in inputArray ) {
-          sum += i
+          sum += i;
         }
 
-        println "Sum: " + sum
+        System.out.println("Sum: " + sum);
         ]]>
       </script>
     </scriptTask>

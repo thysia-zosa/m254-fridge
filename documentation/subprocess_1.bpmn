@@ -8,7 +8,7 @@
     <bpmn:scriptTask id="Activity_1iohovw" name="output" scriptFormat="groovy">
       <bpmn:incoming>Flow_0mqjqtc</bpmn:incoming>
       <bpmn:outgoing>Flow_10wyhxn</bpmn:outgoing>
-      <bpmn:script>println "a = 2"</bpmn:script>
+      <bpmn:script>System.out.println("a = 2");</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0mqjqtc</bpmn:outgoing>
