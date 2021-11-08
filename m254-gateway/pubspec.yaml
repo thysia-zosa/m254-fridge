@@ -12,6 +12,7 @@ dependencies:
   http_server: ^1.0.0
   mongo_dart: ^0.7.2
   json_annotation: ^4.3.0
+  cron: ^0.4.0
 
 dev_dependencies:
   lints: ^1.0.0

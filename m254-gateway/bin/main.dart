@@ -4,14 +4,14 @@ import 'dart:io';
 import 'package:m254_gateway/m254_gateway.dart';
 
 void main(List<String> arguments) {
-  var file = File('fridge_items.json');
-  var source = file.readAsStringSync();
-  var itemList = List<Map<String, dynamic>>.from(json.decode(source));
-  var fridge = Fridge(itemList);
-  var fridgeServer = FridgeServer(
+  // var file = File('fridge_items.json');
+  // var source = file.readAsStringSync();
+  // var itemList = List<Map<String, dynamic>>.from(json.decode(source));
+  // var fridge = Fridge(itemList);
+  var fridgeServer = CamundaServer(
     ip: 'localhost',
     port: 8087,
-    fridge: fridge,
+    // fridge: fridge,
   );
   readLine().listen((event) async {
     switch (event) {
