@@ -92,11 +92,9 @@ class CamundaServer {
     await start();
     var variables = {
       'method': requestBody.request.method,
-      'body': requestBody.body
+      'body': requestBody.body,
+      'id': requestBody.request.uri.pathSegments.last,
     };
-    if (requestBody.request.method == 'DELETE') {
-      variables['id'] = requestBody.request.uri.pathSegments.last;
-    }
     await sendMessage('change', variables);
     requestBody.request.response.statusCode = HttpStatus.created;
     await requestBody.request.response.close();

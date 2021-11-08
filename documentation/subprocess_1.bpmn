@@ -20,9 +20,6 @@ text = file.getText('UTF-8')
 
 execution.setVariable('text', text)</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:startEvent id="StartEvent_1">
-      <bpmn:outgoing>Flow_0mqjqtc</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:endEvent id="Event_1mmno1o">
       <bpmn:incoming>Flow_1puc6va</bpmn:incoming>
     </bpmn:endEvent>
@@ -36,14 +33,37 @@ execution.setVariable('text', text)</bpmn:script>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_10wyhxn</bpmn:incoming>
       <bpmn:outgoing>Flow_1puc6va</bpmn:outgoing>
-      <bpmn:script>System.out.println(text)</bpmn:script>
+      <bpmn:script>import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+def jsonSluper = new JsonSlurper()
+def list = jsonSluper.parseText(text)
+def body = '{"id": "someId", "type": "cheese", "expirationDate": "2021-11-11", "description": "Gruyere"}'
+
+def newItem = jsonSluper.parseText(body)
+list.add(newItem)
+def newList = JsonOutput.toJson(list);
+def prettyList = JsonOutput.prettyPrint(newList)
+
+System.out.println(prettyList)
+
+def da = Date.parse('yyyy-MM-dd', '2021-11-11')
+def ll = da.next().minus(da)
+println(ll)</bpmn:script>
     </bpmn:scriptTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0mqjqtc</bpmn:outgoing>
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0zkefen">
       <bpmndi:BPMNShape id="Participant_1fb1e0z_di" bpmnElement="Participant_1fb1e0z" isHorizontal="true">
         <dc:Bounds x="129" y="60" width="789" height="250" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1puc6va_di" bpmnElement="Flow_1puc6va">
+        <di:waypoint x="750" y="177" />
+        <di:waypoint x="782" y="177" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10wyhxn_di" bpmnElement="Flow_10wyhxn">
         <di:waypoint x="630" y="177" />
         <di:waypoint x="650" y="177" />
@@ -51,10 +71,6 @@ execution.setVariable('text', text)</bpmn:script>
       <bpmndi:BPMNEdge id="Flow_0mqjqtc_di" bpmnElement="Flow_0mqjqtc">
         <di:waypoint x="215" y="177" />
         <di:waypoint x="530" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1puc6va_di" bpmnElement="Flow_1puc6va">
-        <di:waypoint x="750" y="177" />
-        <di:waypoint x="782" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0zb8nre_di" bpmnElement="Activity_1iohovw">
         <dc:Bounds x="530" y="137" width="100" height="80" />
