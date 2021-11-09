@@ -183,7 +183,6 @@ class CamundaServer {
     response = await http.post(
       Uri.parse('http://localhost:8080/engine-rest/task/$id/complete'),
       headers: {'Content-Type': 'application/json'},
-      body: {},
     );
     return response.statusCode;
   }
