@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import api from "./api";
+import api from "./dummy-api";
 import "./App.css";
 import FoodItem from "./FoodItem";
 import Fridge from "./Fridge";
