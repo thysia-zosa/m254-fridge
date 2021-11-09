@@ -24,7 +24,7 @@ export default {
             id: uuid(),
             type: ["carrots", "cheese", "milk"][Math.floor(Math.random() * 3)],
             expirationDate: `20${Math.floor(Math.random() * 10) + 21}-${Math.ceil(Math.random() * 12)}-${Math.ceil(Math.random() * 28)}`,
-            description: makeString(Math.floor(Math.random() * 40) + 10)
+            description: makeString(Math.floor(Math.random() * 40) + 10).trim()
         }))), 500));
     },
     updateFoodItem: (foodItem: FoodItem): Promise<void> => {
