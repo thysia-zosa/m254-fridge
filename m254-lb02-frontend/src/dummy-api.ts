@@ -23,7 +23,7 @@ export default {
         return new Promise(res => setTimeout(() => res(new Array(15).fill(undefined).map((v, k) => ({
             id: uuid(),
             type: ["carrots", "cheese", "milk"][Math.floor(Math.random() * 3)],
-            expirationDate: `20${Math.floor(Math.random() * 10) + 21}-${Math.ceil(Math.random() * 12)}-${Math.ceil(Math.random() * 28)}`,
+            expirationDate: `20${Math.floor(Math.random() * 10) + 21}-` + `${Math.ceil(Math.random() * 12)}-`.padStart(3, '0') + `${Math.ceil(Math.random() * 28)}`.padStart(2, '0'),
             description: makeString(Math.floor(Math.random() * 40) + 10).trim()
         }))), 500));
     },

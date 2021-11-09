@@ -25,7 +25,7 @@ const FoodItem = ({ type, draggingCallback, hasOneInFridge }: FoodItemProps) => 
     }, [isDragging]);
 
     return <div ref={ref} style={{ opacity: isDragging ? 0 : 1 }}>
-        <img src={svgs[type]} style={{ maxHeight: type === "cheese" ? "70px" : "100px", maxWidth: "100px" }} />
+        <img src={svgs[type]} style={{ maxHeight: type === "cheese" ? "70px" : "100px", maxWidth: "100px", cursor: "grab" }} />
         {hasOneInFridge && <img src={svgs[type]} style={{ maxHeight: type === "cheese" ? "70px" : "100px", maxWidth: "100px" }} className={`${type}InFridge`} />}
     </div>
 }

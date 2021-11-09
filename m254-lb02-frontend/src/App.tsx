@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import api from "./dummy-api";
+import api from "./api";
 import "./App.css";
 import FoodItem from "./FoodItem";
 import Fridge from "./Fridge";
@@ -45,7 +45,10 @@ const App = () => {
 	}
 
 	useEffect(() => {
-		api.getInventory().then(setFridgeContent);
+		api.getInventory().then(res => {
+			console.log(res);
+			setFridgeContent(res);
+		});
 	}, []);
 
 	return <DndProvider backend={HTML5Backend}>
@@ -79,6 +82,7 @@ const App = () => {
 				<DialogTitle>Please enter updated details</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
+						{console.log(selectedFoodItem?.expirationDate)}
 						Expiration Date: <TextField type="date" value={selectedFoodItem?.expirationDate} onChange={(e) => {
 							if (selectedFoodItem) setSelectedFoodItem({ ...selectedFoodItem, expirationDate: e.target.value });
 						}} InputProps={{ inputProps: { format: "dd.MM.yyyy" } }} /><br />
@@ -103,7 +107,7 @@ const App = () => {
 		<div className="details">
 			<List style={{ overflow: "auto", maxHeight: "95%" }}>
 				{fridgeContent.filter(foodItem => foodItem.expirationDate).sort((a, b) => a.expirationDate && b.expirationDate ? new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime() : 0).map(foodItem => <ListItem>
-					<ListItem style={{ border: "black 2px solid" }} onClick={() => {
+					<ListItem id={foodItem.id} style={{ border: "black 2px solid", cursor: "pointer", backgroundColor: foodItem.expirationDate && (new Date(foodItem.expirationDate).getTime() - new Date().getTime() <= 260000000) ? "#FFEEEE" : "#FFFFFF" }} onMouseOver={() => (document.getElementById(foodItem.id) as HTMLElement).style.backgroundColor = foodItem.expirationDate && (new Date(foodItem.expirationDate).getTime() - new Date().getTime() <= 260000000) ? "#EEDDDD" : "#EEEEEE"} onMouseLeave={() => (document.getElementById(foodItem.id) as HTMLElement).style.backgroundColor = foodItem.expirationDate && (new Date(foodItem.expirationDate).getTime() - new Date().getTime() <= 260000000) ? "#FFEEEE" : "#FFFFFF"} onClick={() => {
 						setSelectedFoodItem(foodItem);
 						setUpdateFoodDialogOpen(true);
 					}}>
