@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1ts9vki" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.5.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Kuehlschrank">
-    <bpmn:participant id="Participant_0g13haz" name="Kühlschrank" processRef="kuehlschrank" />
+    <bpmn:participant id="kuehlschrenk" name="Kühlschrank" processRef="kuehlschrank" />
     <bpmn:participant id="Participant_1cko1vj" name="User" />
     <bpmn:messageFlow id="Flow_1feput1" sourceRef="Participant_1cko1vj" targetRef="Event_1rlp9jb" />
     <bpmn:messageFlow id="Flow_1r6y88k" sourceRef="Activity_00s0a18" targetRef="Participant_1cko1vj" />
     <bpmn:messageFlow id="Flow_1c6tugw" sourceRef="Participant_1cko1vj" targetRef="Event_1ymcaq4" />
     <bpmn:messageFlow id="Flow_07s35b3" sourceRef="Activity_171mxyh" targetRef="Participant_1cko1vj" />
   </bpmn:collaboration>
-  <bpmn:process id="kuehlschrank" isExecutable="false">
+  <bpmn:process id="kuehlschrank" name="Kühlschrank" isExecutable="true">
     <bpmn:dataStoreReference id="DataStoreReference_08bdx4a" name="JSON-File" />
     <bpmn:sequenceFlow id="Flow_0lkol3f" sourceRef="Gateway_08smnrb" targetRef="Event_1mcqq4j" />
     <bpmn:sequenceFlow id="Flow_1gcc1ox" sourceRef="Event_1mcqq4j" targetRef="Activity_12s9g1b" />
@@ -83,8 +83,7 @@ def newList = JsonOutput.toJson(warnList);
 def prettyList = JsonOutput.prettyPrint(newList)
 
 execution.setVariable('content', prettyList)
-execution.setVariable('subject', 'Ablaufdatum')
-</bpmn:script>
+execution.setVariable('subject', 'Ablaufdatum')</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:intermediateCatchEvent id="Event_1mcqq4j" name="Samstag, 08:00 Uhr">
       <bpmn:incoming>Flow_0lkol3f</bpmn:incoming>
@@ -107,6 +106,13 @@ execution.setVariable('subject', 'Ablaufdatum')
       <bpmn:incoming>Flow_0kc38g7</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:intermediateCatchEvent id="Event_1rlp9jb" name="Warenentnahme / -zufügung / -änderung">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="body">${body}</camunda:outputParameter>
+          <camunda:outputParameter name="method">${method}</camunda:outputParameter>
+          <camunda:outputParameter name="id">${id}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0l0db5n</bpmn:incoming>
       <bpmn:outgoing>Flow_0l9uz5c</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0oop3d4" messageRef="Message_0ly8w91" />
@@ -121,13 +127,20 @@ execution.setVariable('subject', 'Ablaufdatum')
       <bpmn:outgoing>Flow_0kc38g7</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:scriptTask id="Activity_1k36hw9" name="Warenbestand aktualisieren" scriptFormat="groovy">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="body">${body}</camunda:inputParameter>
+          <camunda:inputParameter name="method">${method}</camunda:inputParameter>
+          <camunda:inputParameter name="id">${id}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0l9uz5c</bpmn:incoming>
       <bpmn:outgoing>Flow_15vranm</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0hlwlq0">
         <bpmn:targetRef>DataStoreReference_08bdx4a</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
       <bpmn:script>import groovy.json.JsonSlurper
-import groogy.json.JsonOutput
+import groovy.json.JsonOutput
 
 def jsonSluper = new JsonSlurper()
 def list = jsonSluper.parseText(fridge_items)
@@ -151,8 +164,7 @@ def newList = JsonOutput.toJson(list);
 
 filename = 'fridge.json'
 File file = new File(filename)
-file.write(newList)
-</bpmn:script>
+file.write(newList)</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:sequenceFlow id="Flow_0h72jvd" sourceRef="Activity_12s9g1b" targetRef="Activity_00s0a18" />
     <bpmn:scriptTask id="Activity_12s9g1b" name="Bestandsliste verschicken" scriptFormat="groovy">
@@ -174,8 +186,7 @@ def newList = JsonOutput.toJson(list);
 def prettyList = JsonOutput.prettyPrint(newList)
 
 execution.setVariable('content', prettyList)
-execution.setVariable('subject', 'Bestandsliste')
-</bpmn:script>
+execution.setVariable('subject', 'Bestandsliste')</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:scriptTask id="Activity_00s0a18" name="Warnung verschicken" scriptFormat="groovy" camunda:resource="send_mail.groovy">
       <bpmn:extensionElements>
@@ -196,9 +207,15 @@ execution.setVariable('subject', 'Bestandsliste')
   <bpmn:message id="Message_0ly8w91" name="change" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Kuehlschrank">
-      <bpmndi:BPMNShape id="Participant_0g13haz_di" bpmnElement="Participant_0g13haz" isHorizontal="true" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+      <bpmndi:BPMNShape id="Participant_0g13haz_di" bpmnElement="kuehlschrenk" isHorizontal="true" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
         <dc:Bounds x="160" y="180" width="1110" height="480" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0h72jvd_di" bpmnElement="Flow_0h72jvd">
+        <di:waypoint x="880" y="460" />
+        <di:waypoint x="920" y="460" />
+        <di:waypoint x="920" y="520" />
+        <di:waypoint x="950" y="520" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0eo8zh9_di" bpmnElement="Flow_0eo8zh9">
         <di:waypoint x="880" y="570" />
         <di:waypoint x="920" y="570" />
@@ -260,12 +277,6 @@ execution.setVariable('subject', 'Bestandsliste')
         <di:waypoint x="505" y="460" />
         <di:waypoint x="572" y="460" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0h72jvd_di" bpmnElement="Flow_0h72jvd">
-        <di:waypoint x="880" y="460" />
-        <di:waypoint x="920" y="460" />
-        <di:waypoint x="920" y="520" />
-        <di:waypoint x="950" y="520" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Gateway_0xxyyfr_di" bpmnElement="Gateway_08smnrb">
         <dc:Bounds x="455" y="435" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -323,14 +334,14 @@ execution.setVariable('subject', 'Bestandsliste')
       <bpmndi:BPMNShape id="Event_02grym4_di" bpmnElement="Event_02grym4">
         <dc:Bounds x="1092" y="502" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_17i4s0j_di" bpmnElement="Participant_1cko1vj" isHorizontal="true" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
-        <dc:Bounds x="160" y="80" width="1110" height="60" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_08bdx4a_di" bpmnElement="DataStoreReference_08bdx4a">
         <dc:Bounds x="645" y="695" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="646" y="752" width="51" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_17i4s0j_di" bpmnElement="Participant_1cko1vj" isHorizontal="true" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="160" y="80" width="1110" height="60" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_06li9pc_di" bpmnElement="DataInputAssociation_06li9pc">
         <di:waypoint x="645" y="702" />

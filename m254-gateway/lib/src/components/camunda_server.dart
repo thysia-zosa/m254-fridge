@@ -65,11 +65,15 @@ class CamundaServer {
 
     try {
       await handleRequest[requestBody.request.method]!(requestBody);
-    } catch (_) {
-      requestBody.request.response
-        ..statusCode = HttpStatus.badRequest
-        ..write('resource not found');
-      await requestBody.request.response.close();
+    } catch (error, stacktrace) {
+      try {
+        requestBody.request.response
+          ..statusCode = HttpStatus.badRequest
+          ..write('resource not found');
+        await requestBody.request.response.close();
+      } catch (_) {}
+      print(error);
+      print(stacktrace);
     }
   }
 
@@ -79,7 +83,7 @@ class CamundaServer {
 
     var responseBody = await getVariables(id);
 
-    var result = responseBody['fridge_items'];
+    var result = responseBody['fridge_items']['value'];
 
     requestBody.request.response
       ..statusCode = HttpStatus.ok
@@ -91,9 +95,12 @@ class CamundaServer {
   Future<void> handleChange(HttpRequestBody requestBody) async {
     await start();
     var variables = {
-      'method': requestBody.request.method,
-      'body': requestBody.body,
-      'id': requestBody.request.uri.pathSegments.last,
+      'method': {'value': requestBody.request.method, 'type': 'String'},
+      'body': {'value': requestBody.body, 'type': 'String'},
+      'id': {
+        'value': requestBody.request.uri.pathSegments.last,
+        'type': 'String'
+      },
     };
     await sendMessage('change', variables);
     requestBody.request.response.statusCode = HttpStatus.created;
@@ -107,15 +114,16 @@ class CamundaServer {
     await requestBody.request.response.close();
   }
 
-  Future<int> start() async {
+  Future<String> start() async {
     var response = await http.post(
       Uri.parse(
-          'localhost:8080/engine-rest/process-definition/kuehlschrank/start'),
+          'http://localhost:8080/engine-rest/process-definition/key/kuehlschrank/tenant-id/7/start'),
       headers: {'Content-Type': 'application/json'},
       body: '{}',
     );
 
     if (response.statusCode < 200 || response.statusCode > 299) {
+      print('error start: ${response.statusCode}');
       throw Error();
     }
     var responseBody = json.decode(response.body);
@@ -128,7 +136,7 @@ class CamundaServer {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
       'POST',
-      Uri.parse('localhost:8080/engine-rest/message'),
+      Uri.parse('http://localhost:8080/engine-rest/message'),
     );
     var body = {
       'messageName': message,
@@ -142,37 +150,41 @@ class CamundaServer {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode < 200 || response.statusCode > 299) {
+      print('error sendMessage: ${response.statusCode}');
       throw Error();
     }
 
     return response.statusCode;
   }
 
-  Future<dynamic> getVariables(int id) async {
+  Future<dynamic> getVariables(String id) async {
     var response = await http.get(
-      Uri.parse('localhost:8080/engine-rest/process-instance/$id/variables'),
+      Uri.parse(
+          'http://localhost:8080/engine-rest/process-instance/$id/variables'),
       headers: {'Content-Type': 'application/json'},
     );
 
     if (response.statusCode < 200 || response.statusCode > 299) {
+      print('error getVariables: ${response.statusCode}');
       throw Error();
     }
     var responseBody = json.decode(response.body);
     return responseBody;
   }
 
-  Future<dynamic> completeTask() async {
+  Future<int> completeTask() async {
     var response = await http.get(
-      Uri.parse('localhost:8080/engine-rest/task'),
+      Uri.parse('http://localhost:8080/engine-rest/task'),
       headers: {'Content-Type': 'application/json'},
     );
     var responseBody =
         List<Map<String, dynamic>>.from(json.decode(response.body));
     var id = responseBody.first['id'];
     response = await http.post(
-      Uri.parse('localhost:8080/engine-rest/task/$id/complete'),
+      Uri.parse('http://localhost:8080/engine-rest/task/$id/complete'),
       headers: {'Content-Type': 'application/json'},
       body: {},
     );
+    return response.statusCode;
   }
 }
