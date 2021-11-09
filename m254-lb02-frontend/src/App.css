@@ -26,8 +26,8 @@
 
 .carrotsInFridge {
 	position: absolute;
-	left: 48vw;
-	top: 65vh;
+	left: 51vw;
+	top: 74vh;
 	z-index: 999;
 	rotate: 25deg;
 	filter: saturate(50%);
@@ -36,7 +36,7 @@
 .cheeseInFridge {
 	position: absolute;
 	left: 35vw;
-	top: 51vh;
+	top: 54vh;
 	z-index: 999;
 	rotate: -15deg;
 	transform: scaleX(-1);
@@ -45,7 +45,7 @@
 .milkInFridge {
 	position: absolute;
 	left: 53vw;
-	top: 41vh;
+	top: 42vh;
 	z-index: 999;
 	rotate: 90deg;
 }
